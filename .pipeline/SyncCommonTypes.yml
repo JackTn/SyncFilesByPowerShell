@@ -1,0 +1,24 @@
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: Work
+  steps:
+    - script: echo Start Sync Common Types folder!
+      displayName: 'Run a one-line script'
+    - task: PowerShell@2
+      displayName: 'Run Powershell Script'
+      inputs:
+        targetType: 'filePath'
+        filePath: './pipeline/SyncFilesFromGithub.ps1'
+        pwsh: true
+      env:
+        ADO_METADATA_URL: $(ADO_METADATA_URL)
+        GITHUB_TOKEN: $(GITHUB_TOKEN)
+        token_azuresdk: $(token_azuresdk)
+        token_msazure: $(token_msazure)
+        token_msazuredev: $(token_msazuredev)
+        token_devdiv: $(token_devdiv)
+
